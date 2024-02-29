@@ -7,9 +7,9 @@ public class TreeNode<T>(T val = default, TreeNode<T>? left = null, TreeNode<T>?
     public TreeNode<T>? right = right;
 }
 
-public static class BinaryTree
+public static class TreeNode
 {
-    public static TreeNode<T>? Build<T>(T?[] values) where T : struct
+    public static TreeNode<T>? BuildTree<T>(T?[] values) where T : struct
     {
         if (values is null || values.Length == 0 || values[0] is null) return null;
 
