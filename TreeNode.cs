@@ -6,19 +6,26 @@ public class TreeNode<T>(T val = default, TreeNode<T>? left = null, TreeNode<T>?
     public TreeNode<T>? left = left;
     public TreeNode<T>? right = right;
 
-    public T[] ToArray()
+    public T?[] ToArray()
     {
-        var list = new List<T>();
-        var queue = new Queue<TreeNode<T>?>([this]);
+        var list = new List<T?> { val };
+        var queue = new Queue<TreeNode<T>?>([left, right]);
 
         while (queue.Count > 0)
         {
-            var node = queue.Dequeue();
-            if (node is null) continue;
+            var left = queue.Dequeue();
+            var right = queue.Dequeue();
 
-            list.Add(node.val);
-            queue.Enqueue(node.left);
-            queue.Enqueue(node.right);
+            if (left is null && right is null) continue;
+
+            list.Add(left?.val);
+            list.Add(right?.val);
+
+            queue.Enqueue(left?.left);
+            queue.Enqueue(left?.right);
+
+            queue.Enqueue(right?.left);
+            queue.Enqueue(right?.right);
         }
 
         return [..list];
