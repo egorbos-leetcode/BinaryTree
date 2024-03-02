@@ -5,6 +5,24 @@ public class TreeNode<T>(T val = default, TreeNode<T>? left = null, TreeNode<T>?
     public T val = val;
     public TreeNode<T>? left = left;
     public TreeNode<T>? right = right;
+
+    public T[] ToArray()
+    {
+        var list = new List<T>();
+        var queue = new Queue<TreeNode<T>?>([this]);
+
+        while (queue.Count > 0)
+        {
+            var node = queue.Dequeue();
+            if (node is null) continue;
+
+            list.Add(node.val);
+            queue.Enqueue(node.left);
+            queue.Enqueue(node.right);
+        }
+
+        return [..list];
+    }
 }
 
 public static class TreeNode
